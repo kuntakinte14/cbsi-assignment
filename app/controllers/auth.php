@@ -19,6 +19,22 @@ class Auth extends Controller
 		}
 		echo implode(',',$response);
 	}
+	
+	public function ssologin()
+	{
+		$user = $this->model('SSOUser');
+		$response = [];
+		$result = $user->validateUser();
+		$response[] = $result;
+		if($result == 'success')
+		{
+			//Store userId in cookie and return firstname and lastname
+			setcookie('app_user_id',$user->userId);
+			$response[] = $user->firstname;
+			$response[] = $user->lastname;
+		}
+		echo implode(',',$response);		
+	}
 }
 
 ?>

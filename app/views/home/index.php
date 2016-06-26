@@ -66,7 +66,38 @@ $('document').ready(function()
 		});
     	return false;
 	}
-    /* login submit */    
+    /* login submit */  
+
+    /* SSO login submit */
+    $("#ssologin-form").submit(function(e) {
+
+        e.preventDefault();
+
+		$.ajax({
+			type : 'GET',
+			url  : 'auth/ssologin/',
+			success: function(response)
+			{
+				response = response.split(',');
+				if(response[0]=="success")
+				{
+					// hide login form and display welcome message
+					$("#btn-login").hide();
+					$("#login-box").hide();
+					$("#main").html("Your Single Sign-on request was successful, welcome "+response[1]+" "+response[2]);
+				}
+				else
+				{
+					$("#error").fadeIn(1000, function()
+					{
+						$("#error").html('ERROR: Your Single Sign-on request failed<br>&nbsp;');
+						$("#btn-login").html('Sign In');
+					});
+				}
+			}
+		});
+    });
+    /* SSO login submit */
 });
 </script>
 <style>
@@ -95,6 +126,12 @@ div#error {
 	      		<span></span>Sign In
 	  		</button> 
 	    </div>  
+	    </form>
+	    &nbsp;<br>&nbsp;<br>OR<br>&nbsp;<br>&nbsp;<br>
+	    <form method="post" id="ssologin-form">
+	    	<button type="submit" name="btn-ssologin" id="btn-ssologin">
+	      		<span></span>Utilize SSO
+	  		</button>
 	    </form>
 	</div>
 </div>    
