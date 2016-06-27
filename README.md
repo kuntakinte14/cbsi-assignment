@@ -6,7 +6,7 @@ The one set of valid credentials is test@test.com/abc123
 
 The application uses a simple server-side MVC implementation for organizing the code. Functionally, the application utilizes ajax to process a login form submission and authenticate a user. The server-side authentication uses hard-coded values for expediency, with a logical next step being the integration of a database for storing user credentials and additional code for working with the database.
 
-To satisfy the requirement for overriding the authentication method, I added an SSOUser class that extends the User call, overriding the validateUser() method to provide the capability of authenticating against an SSO service. This method is called when clicking on the "Utilize SSO" button. What I have implemeted is little more than stubbing out the method calls, but it provides an example of polymorphism for the User class.
+To satisfy the requirement for overriding the authentication method, I added an SSOUser class that extends the User class, overriding the validateUser() method to provide the alternate capability of authenticating against an SSO service. This method is called when clicking on the "Utilize SSO" button. What I have implemeted is little more than stubbing out the method calls, but it provides an example of polymorphism for the User class.
 
 Other improvements to the app would involve more complete dynamic routing, better/more error handling, data sanitation/security, and visual styling. There is currently no server-side session being set, but that would be a logical add to maintain state.
 
